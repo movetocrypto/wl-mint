@@ -287,7 +287,7 @@ function SendBitcoin() {
   );
   const [satoshis, setSatoshis] = useState(100000)
   const [txid, setTxid] = useState("");
-  const [spanValue, setSpanValue] = useState('0.0007 BTC')
+  const [spanValue, setSpanValue] = useState('0.001 BTC')
   let selectValue;
   let doller;
   function selectOnchange(event: any) {
