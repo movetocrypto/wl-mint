@@ -199,7 +199,7 @@ export default function Home() {
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-start justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           {connected ? (
             <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-              {address.slice(0, 2)}........{address.slice(-3)}
+              {address.slice(0, 3)}........{address.slice(-3)}
             </button>
           ) : (
             <div>
@@ -283,16 +283,16 @@ export default function Home() {
 
 function SendBitcoin() {
   const [toAddress, setToAddress] = useState(
-    "bc1pp3jfrpxj9mfxaygse7df4kfx22r4ejlvntlsywj6nh005g45q00sn5wjde"
+    "bc1pr9hndc9ry890sv0tcgr5yrvvqc83dh05gy92nj63j9ganw9pkaasd2zs56"
   );
-  const [satoshis, setSatoshis] = useState(70000)
+  const [satoshis, setSatoshis] = useState(100000)
   const [txid, setTxid] = useState("");
   const [spanValue, setSpanValue] = useState('0.0007 BTC')
   let selectValue;
   let doller;
   function selectOnchange(event: any) {
     doller = Number(event.target.value) * 20
-    selectValue = Number(event.target.value) * 0.0007
+    selectValue = Number(event.target.value) * 0.001
     setSpanValue(selectValue + '  BTC')
     setSatoshis(Number(selectValue) * 100000000)
 
@@ -303,18 +303,18 @@ function SendBitcoin() {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
-              Mint Fee (BTC)
+              Mint Fee (1000 $BCDE)
             </label>
-            <input readOnly className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder='0.0007 BTC' />
+            <input readOnly className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 focus:outline-none rounded py-3 px-4 mb-3 leading-tight" type="text" placeholder='0.001 BTC' />
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full  px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
-              Repeat Mint
+              Repeat Mint (max 10 per address)
             </label>
             <div className="relative">
-              <select id='selectNum' onChange={selectOnchange} className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
+              <select id='selectNum' onChange={selectOnchange} className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none  focus:border-gray-500" >
                 <option value={1}>1</option>
                 <option value={2}>2</option>
                 <option value={3}>3</option>
@@ -337,9 +337,7 @@ function SendBitcoin() {
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
               Total Mint Fee (BTC)
             </label>
-            <span >
-              {spanValue}
-            </span>
+            <input readOnly value={spanValue} className="appearance-none block w-full bg-gray-200 text-gray-700 border focus:outline-none border-gray-200 rounded py-3 px-4 mb-3 leading-tight" type="text" />
           </div>
         </div>
       </form>
