@@ -124,7 +124,7 @@ export default function Home() {
           </a>
         </div>
 
-        <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-5 lg:text-left">
+        <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
           <a
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
             rel="noopener noreferrer"
@@ -133,19 +133,7 @@ export default function Home() {
               TOKEN
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              BCDE is a brc-20 token used in the BCDE DAO Ecosystem.
-            </p>
-          </a>
-
-          <a
-            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            rel="noopener noreferrer"
-          >
-            <h2 className={`mb-3 text-2xl font-semibold`}>
-              PASS
-            </h2>
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              BCDE Pass is a Pass Inscription awarded to the top 2100 BCDE Token purchasers.
+              Majo is a brc-20 token used in the BRC-20 DAO Ecosystem.
             </p>
           </a>
 
@@ -157,7 +145,7 @@ export default function Home() {
               SWAP
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              BCDE DAO SWAP can bridge any brc-20 to trade on the DEX, which also includes an AMM if any whales or founders want to LP.
+              BRC-20 DAO swap can bridge any brc-20 to trade on the dex, which also includes an AMM if any whales or founders want to LP.
             </p>
           </a>
 
@@ -169,7 +157,7 @@ export default function Home() {
               LAUNCHPAD
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              Pass Holders will have access to WL for new projects in the BCDE launchpad that will be created in the future.
+              Pass Holders will have access to WL for new projects in the launchpad that will be created in the future.
             </p>
           </a>
           <a
@@ -180,7 +168,7 @@ export default function Home() {
               BTC L2
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              BCDE will build a Bitcoin layer for smart contracts;it enables smart contracts and  decentralized applications to trustlessly use Bitcoin as an asset and settle transactions on the Bitcoin blockchain.
+              BRC-20 DAO will build a Bitcoin layer for smart contracts;it enables smart contracts and  decentralized applications to trustlessly use Bitcoin as an asset and settle transactions on the Bitcoin blockchain.
             </p>
           </a>
         </div>
@@ -239,7 +227,7 @@ export default function Home() {
       <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
         <a href="https://twitter.com/BRC20_DAO" target='_blank'>
           <h1 className='mb-5 text-3xl md:text-5xl font-semibold'>
-            BRC-20 Deneutralization DAO
+            $Majo Mint
           </h1>
         </a>
       </div>
@@ -264,14 +252,19 @@ export default function Home() {
                 Total supply: 21,000,000
               </h2>
               <h2 className={`mb-3 text-2xl italic`}>
-                Ecosystem Rewards & Burn: 40%
-
+                - Airdrop: 50%
               </h2>
               <h2 className={`mb-3 text-2xl italic`}>
-                OpenMint: 50%
+                - WL Mint: 21%
               </h2>
               <h2 className={`mb-3 text-2xl italic`}>
-                OG & Airdrop: 10%
+                - DAO Treasury: 18%
+              </h2>
+              <h2 className={`mb-3 text-2xl italic`}>
+                - Technical Contributor: 5%
+              </h2>
+              <h2 className={`mb-3 text-2xl italic`}>
+                - Marketing: 6%
               </h2>
             </div>
           </div>
@@ -303,12 +296,12 @@ function SendBitcoin() {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
-              Mint Fee (1000 $BCDE)
+              Mint Fee (10000 $Majo)
             </label>
-            <input readOnly className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 focus:outline-none rounded py-3 px-4 mb-3 leading-tight" type="text" placeholder='0.001 BTC' />
+            <input readOnly className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 focus:outline-none rounded py-3 px-4 mb-3 leading-tight" type="text" placeholder='0.01 BTC' />
           </div>
         </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
+        {/* <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full  px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
               Repeat Mint (max 10 per address)
@@ -331,24 +324,24 @@ function SendBitcoin() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
+        </div> */}
+        {/* <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
               Total Mint Fee (BTC)
             </label>
             <input readOnly value={spanValue} className="appearance-none block w-full bg-gray-200 text-gray-700 border focus:outline-none border-gray-200 rounded py-3 px-4 mb-3 leading-tight" type="text" />
           </div>
-        </div>
+        </div> */}
       </form>
       <div>
         <button className="bg-white hover:bg-gray-100 text-gray-2200 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           onClick={async () => {
             try {
-              console.log(satoshis)
               const txid = await (window as any).unisat.sendBitcoin(
                 toAddress,
-                satoshis
+                1000000
+                // satoshis
               );
               setTxid(txid);
             } catch (e) {
