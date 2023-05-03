@@ -2,11 +2,13 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import React, { useEffect, useRef, useState } from "react";
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const [unisatInstalled, setUnisatInstalled] = useState(false);
   const [connected, setConnected] = useState(false);
+  
   const [accounts, setAccounts] = useState<string[]>([]);
   const [publicKey, setPublicKey] = useState("");
   const [address, setAddress] = useState("");
@@ -17,12 +19,13 @@ export default function Home() {
     total: 0,
   });
   const [network, setNetwork] = useState("livenet");
+  
 
   const getBasicInfo = async () => {
     const unisat = (window as any).unisat;
     const [address] = await unisat.getAccounts();
     setAddress(address);
-
+    
     const publicKey = await unisat.getPublicKey();
     setPublicKey(publicKey);
 
@@ -42,17 +45,17 @@ export default function Home() {
       // prevent from triggering twice
       return;
     }
+    
     self.accounts = _accounts;
     if (_accounts.length > 0) {
       setAccounts(_accounts);
       setConnected(true);
-
       setAddress(_accounts[0]);
-
       getBasicInfo();
     } else {
       setConnected(false);
     }
+    
   };
 
   const handleNetworkChanged = (network: string) => {
@@ -60,11 +63,14 @@ export default function Home() {
     getBasicInfo();
   };
 
+
   useEffect(() => {
     const unisat = (window as any).unisat;
+    // let MintButton =  
     if (unisat) {
       setUnisatInstalled(true);
     } else {
+
       return;
     }
     unisat.getAccounts().then((accounts: string[]) => {
@@ -73,7 +79,7 @@ export default function Home() {
 
     unisat.on("accountsChanged", handleAccountsChanged);
     unisat.on("networkChanged", handleNetworkChanged);
-
+    
     return () => {
       unisat.removeListener("accountsChanged", handleAccountsChanged);
       unisat.removeListener("networkChanged", handleNetworkChanged);
@@ -241,7 +247,7 @@ export default function Home() {
               alignItems: "center",
             }}
           >
-            <SendBitcoin />
+            <SendBitcoin  />
           </div>
         ) : (
           <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-1 lg:text-left">
@@ -274,6 +280,7 @@ export default function Home() {
   )
 }
 
+
 function SendBitcoin() {
   const [toAddress, setToAddress] = useState(
     "bc1pr9hndc9ry890sv0tcgr5yrvvqc83dh05gy92nj63j9ganw9pkaasd2zs56"
@@ -281,8 +288,39 @@ function SendBitcoin() {
   const [satoshis, setSatoshis] = useState(100000)
   const [txid, setTxid] = useState("");
   const [spanValue, setSpanValue] = useState('0.001 BTC')
+  const [userAddress,setUserAddress]=useState("")
+  const [enableButton,setEnableButton] = useState(true)
+  const render = new FileReader()
+
+  const [addressArray,setAddressArray] = useState<string[]>([])
   let selectValue;
   let doller;
+  useEffect(()=>{
+    fetch('/add.txt')
+    .then((res)=>res.text())
+    .then((data)=>{
+      let my_arr =data.split(/[(\r\n)\r\n]+/)
+      setAddressArray(my_arr)
+    })
+  },[])
+ 
+  const getBaseInfo = async () => {
+    const unisat = (window as any).unisat;
+    const [userAddress] = await unisat.getAccounts();
+    const userAdl=addressArray.filter((object)=>{
+      return object===userAddress
+     })
+     if(userAdl.length&&userAdl.length>0){
+      setEnableButton(true)
+     }else{
+      setEnableButton(false)
+     }
+   }
+
+   getBaseInfo()
+   
+   
+  
   function selectOnchange(event: any) {
     doller = Number(event.target.value) * 20
     selectValue = Number(event.target.value) * 0.001
@@ -335,7 +373,9 @@ function SendBitcoin() {
         </div> */}
       </form>
       <div>
-        <button className="bg-white hover:bg-gray-100 text-gray-2200 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        {enableButton?(<button 
+           
+           className="bg-white hover:bg-gray-100 text-gray-2200 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           onClick={async () => {
             try {
               const txid = await (window as any).unisat.sendBitcoin(
@@ -350,7 +390,12 @@ function SendBitcoin() {
           }}
         >
           Mint
-        </button>
+        </button>):(<button disabled 
+           className="bg-white disabled:opacity-25 hover:bg-gray-100 text-gray-2200 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        >
+          You are not Whitetlist
+        </button>)}
+        
 
       </div>
 
