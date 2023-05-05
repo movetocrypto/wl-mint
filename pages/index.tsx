@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const [unisatInstalled, setUnisatInstalled] = useState(false);
   const [connected, setConnected] = useState(false);
-  
+
   const [accounts, setAccounts] = useState<string[]>([]);
   const [publicKey, setPublicKey] = useState("");
   const [address, setAddress] = useState("");
@@ -19,13 +19,13 @@ export default function Home() {
     total: 0,
   });
   const [network, setNetwork] = useState("livenet");
-  
+
 
   const getBasicInfo = async () => {
     const unisat = (window as any).unisat;
     const [address] = await unisat.getAccounts();
     setAddress(address);
-    
+
     const publicKey = await unisat.getPublicKey();
     setPublicKey(publicKey);
 
@@ -45,7 +45,7 @@ export default function Home() {
       // prevent from triggering twice
       return;
     }
-    
+
     self.accounts = _accounts;
     if (_accounts.length > 0) {
       setAccounts(_accounts);
@@ -55,7 +55,7 @@ export default function Home() {
     } else {
       setConnected(false);
     }
-    
+
   };
 
   const handleNetworkChanged = (network: string) => {
@@ -79,7 +79,7 @@ export default function Home() {
 
     unisat.on("accountsChanged", handleAccountsChanged);
     unisat.on("networkChanged", handleNetworkChanged);
-    
+
     return () => {
       unisat.removeListener("accountsChanged", handleAccountsChanged);
       unisat.removeListener("networkChanged", handleNetworkChanged);
@@ -247,7 +247,7 @@ export default function Home() {
               alignItems: "center",
             }}
           >
-            <SendBitcoin  />
+            <SendBitcoin />
           </div>
         ) : (
           <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-1 lg:text-left">
@@ -288,39 +288,39 @@ function SendBitcoin() {
   const [satoshis, setSatoshis] = useState(100000)
   const [txid, setTxid] = useState("");
   const [spanValue, setSpanValue] = useState('0.001 BTC')
-  const [userAddress,setUserAddress]=useState("")
-  const [enableButton,setEnableButton] = useState(true)
+  const [userAddress, setUserAddress] = useState("")
+  const [enableButton, setEnableButton] = useState(true)
   const render = new FileReader()
 
-  const [addressArray,setAddressArray] = useState<string[]>([])
+  const [addressArray, setAddressArray] = useState<string[]>([])
   let selectValue;
   let doller;
-  useEffect(()=>{
+  useEffect(() => {
     fetch('/add.txt')
-    .then((res)=>res.text())
-    .then((data)=>{
-      let my_arr =data.split(/[(\r\n)\r\n]+/)
-      setAddressArray(my_arr)
-    })
-  },[])
- 
+      .then((res) => res.text())
+      .then((data) => {
+        let my_arr = data.split(/[(\r\n)\r\n]+/)
+        setAddressArray(my_arr)
+      })
+  }, [])
+
   const getBaseInfo = async () => {
     const unisat = (window as any).unisat;
     const [userAddress] = await unisat.getAccounts();
-    const userAdl=addressArray.filter((object)=>{
-      return object===userAddress
-     })
-     if(userAdl.length&&userAdl.length>0){
+    const userAdl = addressArray.filter((object) => {
+      return object === userAddress
+    })
+    if (userAdl.length && userAdl.length > 0) {
       setEnableButton(true)
-     }else{
+    } else {
       setEnableButton(false)
-     }
-   }
+    }
+  }
 
-   getBaseInfo()
-   
-   
-  
+  getBaseInfo()
+
+
+
   function selectOnchange(event: any) {
     doller = Number(event.target.value) * 20
     selectValue = Number(event.target.value) * 0.001
@@ -336,7 +336,7 @@ function SendBitcoin() {
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
               Mint Fee (10000 $Majo)
             </label>
-            <input readOnly className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 focus:outline-none rounded py-3 px-4 mb-3 leading-tight" type="text" placeholder='0.01 BTC' />
+            <input readOnly className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 focus:outline-none rounded py-3 px-4 mb-3 leading-tight" type="text" placeholder='0.015 BTC' />
           </div>
         </div>
         {/* <div className="flex flex-wrap -mx-3 mb-6">
@@ -373,14 +373,14 @@ function SendBitcoin() {
         </div> */}
       </form>
       <div>
-        {enableButton?(<button 
-           
-           className="bg-white hover:bg-gray-100 text-gray-2200 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        {enableButton ? (<button
+
+          className="bg-white hover:bg-gray-100 text-gray-2200 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           onClick={async () => {
             try {
               const txid = await (window as any).unisat.sendBitcoin(
                 toAddress,
-                1000000
+                1500000
                 // satoshis
               );
               setTxid(txid);
@@ -390,12 +390,12 @@ function SendBitcoin() {
           }}
         >
           Mint
-        </button>):(<button disabled 
-           className="bg-white disabled:opacity-25 hover:bg-gray-100 text-gray-2200 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        </button>) : (<button disabled
+          className="bg-white disabled:opacity-25 hover:bg-gray-100 text-gray-2200 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
         >
           You are not Whitetlist
         </button>)}
-        
+
 
       </div>
 
